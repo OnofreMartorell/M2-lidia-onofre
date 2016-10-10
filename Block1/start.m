@@ -95,6 +95,7 @@ clearvars;
 %Read the image
 I = double(imread('image_to_Restore.png'));
 
+i = I(:,:,1);
 [ni, nj, nC] = size(I);
 
 
@@ -108,6 +109,7 @@ I_ch3 = I(:,:,3);
 
 %TO COMPLETE 1
 
+<<<<<<< HEAD
 mask = zeros(ni,nj) ; %mask_img(i,j) == 1 means we have lost information in that pixel
                                       %mask(i,j) == 0 means we have information in that pixel
 for i=1:ni
@@ -236,11 +238,3 @@ param.hj = 1 / (nj-1);
 figure(1)
 imshow(I);
 title('Before')
-
-Iinp(:,:,1)=sol_Laplace_Equation_Axb(I_ch1, mask, param);
-Iinp(:,:,2)=sol_Laplace_Equation_Axb(I_ch2, mask, param);
-Iinp(:,:,3)=sol_Laplace_Equation_Axb(I_ch3, mask, param);
-    
-figure(2)
-imshow(Iinp)
-title('After');
