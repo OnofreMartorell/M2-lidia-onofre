@@ -109,7 +109,7 @@ I_ch3 = I(:,:,3);
 
 %TO COMPLETE 1
 
-
+<<<<<<< HEAD
 mask = zeros(ni,nj) ; %mask_img(i,j) == 1 means we have lost information in that pixel
                                       %mask(i,j) == 0 means we have information in that pixel
 for i=1:ni
