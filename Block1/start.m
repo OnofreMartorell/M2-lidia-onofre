@@ -12,7 +12,7 @@ clearvars;
 %  image5_toRestore.jpg
 
 %name= 'image5';
-name= 'image5';
+name= 'image2';
 
 I = double(imread([ name '_toRestore.jpg']));
 %I=I(1:10,1:10);
@@ -54,7 +54,12 @@ figure(1)
 imshow(I);
 title('Before')
 
-Iinp=sol_Laplace_Equation_Axb(I, mask, param);
+%  Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
+
+Iinp=G7_sol_Alternative_Laplace_Equation_Axb(I, mask, param);
+
+
+
 figure(2)
 imshow(Iinp)
 title('After');
@@ -81,9 +86,14 @@ figure(1)
 imshow(I);
 title('Before')
 
-Iinp(:,:,1)=sol_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
-Iinp(:,:,2)=sol_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
-Iinp(:,:,3)=sol_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
+% Iinp(:,:,1)=G7_sol_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
+% Iinp(:,:,2)=G7_sol_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
+% Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
+
+Iinp(:,:,1)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
+Iinp(:,:,2)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
+Iinp(:,:,3)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
+ 
 
 figure(2)
 imshow(Iinp)
@@ -109,7 +119,7 @@ I_ch3 = I(:,:,3);
 
 %TO COMPLETE 1
 
-<<<<<<< HEAD
+
 mask = zeros(ni,nj) ; %mask_img(i,j) == 1 means we have lost information in that pixel
                                       %mask(i,j) == 0 means we have information in that pixel
 for i=1:ni
@@ -135,9 +145,9 @@ figure(1)
 imshow(I);
 title('Before')
 
-Iinp(:,:,1)=sol_Laplace_Equation_Axb(I_ch1, mask, param);
-Iinp(:,:,2)=sol_Laplace_Equation_Axb(I_ch2, mask, param);
-Iinp(:,:,3)=sol_Laplace_Equation_Axb(I_ch3, mask, param);
+Iinp(:,:,1)=G7_sol_Laplace_Equation_Axb(I_ch1, mask, param);
+Iinp(:,:,2)=G7_sol_Laplace_Equation_Axb(I_ch2, mask, param);
+Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I_ch3, mask, param);
     
 figure(2)
 imshow(Iinp)
@@ -147,7 +157,7 @@ title('After');
 clearvars;
 
 %Read the image
-I = double(imread('image_to_Restore.png'));
+I = double(imread('Barbara24.tiff'));
 
 [ni, nj, nC] = size(I);
 
@@ -187,9 +197,9 @@ figure(1)
 imshow(I);
 title('Before')
 
-Iinp(:,:,1)=sol_Laplace_Equation_Axb(I_ch1, mask, param);
-Iinp(:,:,2)=sol_Laplace_Equation_Axb(I_ch2, mask, param);
-Iinp(:,:,3)=sol_Laplace_Equation_Axb(I_ch3, mask, param);
+Iinp(:,:,1)=G7_sol_Laplace_Equation_Axb(I_ch1, mask, param);
+Iinp(:,:,2)=G7_sol_Laplace_Equation_Axb(I_ch2, mask, param);
+Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I_ch3, mask, param);
     
 figure(2)
 imshow(Iinp)
@@ -199,7 +209,7 @@ title('After');
 clearvars;
 
 %Read the image
-I = double(imread('image_to_Restore.png'));
+I = double(imread('Boats24.tiff'));
 
 [ni, nj, nC] = size(I);
 
