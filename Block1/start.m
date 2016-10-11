@@ -12,7 +12,7 @@ clearvars;
 %  image5_toRestore.jpg
 
 %name= 'image5';
-name= 'image2';
+name= 'image5';
 
 I = double(imread([ name '_toRestore.jpg']));
 %I=I(1:10,1:10);
@@ -54,9 +54,9 @@ figure(1)
 imshow(I);
 title('Before')
 
-%  Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
+ Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
 
-Iinp=G7_sol_Alternative_Laplace_Equation_Axb(I, mask, param);
+% Iinp=G7_sol_Alternative_Laplace_Equation_Axb(I, mask, param);
 
 
 
@@ -86,13 +86,13 @@ figure(1)
 imshow(I);
 title('Before')
 
-% Iinp(:,:,1)=G7_sol_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
-% Iinp(:,:,2)=G7_sol_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
-% Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
+Iinp(:,:,1)=G7_sol_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
+Iinp(:,:,2)=G7_sol_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
+Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
 
-Iinp(:,:,1)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
-Iinp(:,:,2)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
-Iinp(:,:,3)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
+% Iinp(:,:,1)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,1), mask(:,:,1), param);
+% Iinp(:,:,2)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,2), mask(:,:,2), param);
+% Iinp(:,:,3)=G7_sol_Alternative_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
  
 
 figure(2)
