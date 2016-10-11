@@ -6,6 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\DeclareMathOperator{\argmin}{\mathrm{arg\, min}}
 \author{Onofre Martorell, Lidia Talavera}
 \title{Image inpainting}
 %\setbeamercovered{transparent} 
@@ -24,11 +25,80 @@
 %\tableofcontents
 %\end{frame}
 
-\begin{frame}{Proof of Laplace equation}
-\begin{block}{Prueba}
-$$\sum_{i=1}^n(n + 1) \cdot \frac{f}{\partial x}$$
-\end{block}
+\begin{frame}{From functional to Laplace equation}
+We have the functional
+$$
+\displaystyle\argmin\limits_{u\in W^{1,2}(\Omega)}\int _D |\nabla u(x)|^2dx
+$$
+According to the Necessary condition for the extremum\footnote{We saw this result at the first class of the module}, the minimum of the functional is the solution of
+$$-\sum_{i=1}^2 \frac{\partial}{\partial x_i}\frac{\partial\mathcal{F}}{\partial p_i} + \frac{\partial\mathcal{F}}{\partial u} = 0$$
+
+where $\nabla u(u) = (p_1, p_2)$ and $\mathcal{F}$ is the functional.
+\end{frame}
+
+\begin{frame}{From functional to Laplace equation}
+Replacing the given functional, we get
+$$ 0 = - \frac{\partial}{\partial x}\frac{\partial(u_x^2 + u_y^2)}{\partial u_x} - \frac{\partial}{\partial y}\frac{\partial(u_x^2 + u_y^2)}{\partial u_y} + \frac{\partial(u_x^2 + u_y^2)}{\partial u} = $$
+$$ = - \frac{\partial}{\partial x}(2u_x) - \frac{\partial}{\partial y}(2u_y) + 0 = 2u_{xx} + 2u_{yy}$$
+In conclusion,
+$$2(u_{xx} + u_{yy})=0\Longrightarrow \Delta u = 0$$
+\end{frame}
+
+\begin{frame}{The problem of inpainting}
+The problem of inpainting can be modeled as
+$$
+\begin{cases}
+\displaystyle\argmin\limits_{u\in W^{1,2}(\Omega)}\int _D |\nabla u(x)|^2dx,\\
+u|_{\partial D} = f
+\end{cases}
+$$
+where $f$ is the image to inpaint.
+
+
+With the result obtained, this problem is equivalent to find the solution of
+$$\left\lbrace
+\begin{array}{l l}
+
+\Delta u = 0& \text{in }D \\
+u = f & \text{in }\partial D
+
+\end{array}\right.
+$$
+The equation is completed with homogeneous Neumann boundary
+conditions at the boundary of the image.
 
 \end{frame}
 
+\begin{frame}
+The laplacian can be computed as
+$$\Delta u = div(\nabla u).$$
+
+\begin{block}{Discretization of the gradient}
+Using forward differences, we obtain
+$$\nabla u_{ij} = \bigg(\frac{u_{i+1,j} - u_{i,j}}{h_i}, \frac{u_{i,j+1} - u_{i,j}}{h_j}\bigg)$$
+\end{block}
+\begin{block}{Discretization of the divergence}
+Taking $v = (v_1, v_2)$ and using backward differences, we obtain
+$$div(v)_{i,j} = \frac{v_{1_{i,j}} - v_{1_{i-1,j}}}{h_i} + \frac{v_{2_{i,j}} - v_{2_{i,j-1}}}{h_j}$$
+\end{block}
+\end{frame}
+
+\begin{frame}
+Joining the previous discretizations and doing some calculus we obtain the following equation for each pixel in $D$
+$$\frac{1}{h_j^2}u_{i,j-1} + \frac{1}{h_i^2}u_{i-1, j} - \bigg(\frac{2}{h_i^2}+\frac{2}{h_j^2}\bigg)u_{i,j} + \frac{1}{h_i^2}u_{i+1,j} + \frac{1}{h_j^2}u_{i, j+1} = 0$$
+
+
+\end{frame}
+
+\begin{frame}
+Boundary conditions
+\end{frame}
+
+\begin{frame}
+Equations for all the points of the image
+\end{frame}
+
+\begin{frame}
+Results(images)
+\end{frame}
 \end{document}
