@@ -54,7 +54,7 @@ figure(1)
 imshow(I);
 title('Before')
 
-%  Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
+% Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
 
 Iinp=G7_sol_Alternative_Laplace_Equation_Axb(I, mask, param);
 

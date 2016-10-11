@@ -22,7 +22,7 @@ nPixels =(ni+2)*(nj+2); %Number of pixels
 b = zeros(nPixels,1);
 
 %Vector counter
-idx=1;
+idx = 1;
 
 %North side boundary conditions
 i=1;
@@ -33,7 +33,7 @@ for j=1:nj+2
     
     %Fill Idx_Ai, idx_Aj and a_ij with the corresponding values and
     %vector b
-    idx_Ai(idx)=p; 
+    idx_Ai(idx) = p; 
     idx_Aj(idx) = p; 
     a_ij(idx) = 1;
     idx=idx+1;
