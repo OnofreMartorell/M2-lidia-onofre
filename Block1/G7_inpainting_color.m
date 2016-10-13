@@ -18,7 +18,7 @@ while 1
     [ grad_v_x, grad_v_y ] = gradient( div - (Im(3, :, :)/lambda) );
     grd_div_3 = [ grad_v_x, grad_v_y ];
     for i = 1:3
-        p_n1 = (p_n(i, :, :, :) + delta_t )/( );
+        p_n1 = (p_n(i, :, :, :) + delta_t )/( 1);
     end   
     
 end    
