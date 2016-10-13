@@ -18,6 +18,12 @@ nPixels =(ni+2)*(nj+2); %Number of pixels
 %idx_Aj: Vector for the nonZero j index of matrix A
 %a_ij: Vector for the value at position ij of matrix A
 
+%Determine the number of number of non-zero values in the matrix
+values = 5*sum(sum(dom2Inp)) + 2*(nj + ni + 4) + ni*nj - sum(sum(dom2Inp)); 
+
+idx_Ai = zeros(values, 1);
+idx_Aj = zeros(values, 1);
+a_ij = zeros(values, 1);
 
 b = zeros(nPixels,1);
 
@@ -25,15 +31,15 @@ b = zeros(nPixels,1);
 idx=1;
 
 %North side boundary conditions
-i=1;
-for j=1:nj+2
+i = 1;
+for j = 1:nj+2
     %from image matrix (i,j) coordinates to vectorial (p) coordinate
     p = (j-1)*(ni+2)+i;
     
     
     %Fill Idx_Ai, idx_Aj and a_ij with the corresponding values and
     %vector b
-    idx_Ai(idx)=p; 
+    idx_Ai(idx) = p; 
     idx_Aj(idx) = p; 
     a_ij(idx) = 1;
     idx=idx+1;
@@ -70,7 +76,7 @@ end
 
 %West side boundary conditions
 j=1;
-for i=2:ni+1
+for i=1:ni+2
 % for i=1:ni+2
     %from image matrix (i,j) coordinates to vectorial (p) coordinate
     p = (j-1)*(ni+2)+i;
@@ -93,8 +99,8 @@ for i=2:ni+1
 end
 
 %East side boundary conditions
-j=nj+2;
-for i=1:ni+2
+j = nj+2;
+for i = 1:ni+2
     %from image matrix (i,j) coordinates to vectorial (p) coordinate
     p = (j-1)*(ni+2)+i;
     

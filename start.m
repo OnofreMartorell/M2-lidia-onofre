@@ -11,7 +11,10 @@ clearvars;
 %  image4_toRestore.jpg
 %  image5_toRestore.jpg
 
+<<<<<<< HEAD:start.m
 %name= 'image5';
+=======
+>>>>>>> 1ee52038a5915111efca904ff56bb994873098ab:Block1/start.m
 name= 'image5';
 
 I = double(imread([ name '_toRestore.jpg']));
@@ -54,7 +57,11 @@ figure(1)
 imshow(I);
 title('Before')
 
+<<<<<<< HEAD:start.m
  Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
+=======
+Iinp=G7_sol_Laplace_Equation_Axb(I, mask, param);
+>>>>>>> 1ee52038a5915111efca904ff56bb994873098ab:Block1/start.m
 
 % Iinp=G7_sol_Alternative_Laplace_Equation_Axb(I, mask, param);
 
@@ -73,6 +80,7 @@ I=I/256;
 
 %Number of pixels for each dimension, and number of channels
 [ni, nj, nC] = size(I);
+[ni, nj, ~] = size(I);
 
 mask_img=double(imread('image6_mask.tif'));
 mask = mask_img >128; %mask(i,j) == 1 means we have lost information in that pixel
@@ -121,6 +129,9 @@ I_ch3 = I(:,:,3);
 
 
 mask = zeros(ni,nj) ; %mask_img(i,j) == 1 means we have lost information in that pixel
+%Create the mask
+mask = zeros(ni,nj) ; 
+%mask_img(i,j) == 1 means we have lost information in that pixel
                                       %mask(i,j) == 0 means we have information in that pixel
 for i=1:ni
     for j=1:nj
