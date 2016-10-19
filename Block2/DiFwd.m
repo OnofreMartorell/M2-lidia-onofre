@@ -3,7 +3,7 @@ function [ result ] = DiFwd( I, hi )
 % i coordinate only for the 1:end-1 rows. The last row is not replaced
     
     if (~exist('hi', 'var'))
-        hi=1;
+        hi = 1;
     end;
 
     result = I;

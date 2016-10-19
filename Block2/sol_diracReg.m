@@ -5,3 +5,4 @@ function y = sol_diracReg( x, epsilon )
 
 y = ??; %TODO 19: Line to complete
 
+end

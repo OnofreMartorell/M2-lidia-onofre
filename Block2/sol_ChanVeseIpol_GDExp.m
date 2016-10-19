@@ -15,18 +15,18 @@ function [ phi ] = sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambd
 %iterMax : MAximum number of iterations
 %reIni   : Iterations for reinitialization. 0 means no reinitializacion
 
-[ni,nj]=size(I);
-hi=1;
-hj=1;
+[ni, nj] = size(I);
+hi = 1;
+hj = 1;
 
 
-phi=phi_0;
-dif=inf;
-nIter=0;
-while dif>tol && nIter<iterMax
+phi = phi_0;
+dif = inf;
+nIter = 0;
+while dif > tol && nIter < iterMax
     
-    phi_old=phi;
-    nIter=nIter+1;        
+    phi_old = phi;
+    nIter = nIter+1;        
     
     
     %Fixed phi, Minimization w.r.t c1 and c2 (constant estimation)
@@ -68,21 +68,21 @@ while dif>tol && nIter<iterMax
     
             
     %Reinitialization of phi
-    if reIni>0 && mod(nIter, reIni)==0
+    if reIni > 0 && mod(nIter, reIni) == 0
         indGT = phi >= 0;
         indLT = phi < 0;
         
-        phi=double(bwdist(indLT) - bwdist(indGT));
+        phi = double(bwdist(indLT) - bwdist(indGT));
         
         %Normalization [-1 1]
         nor = min(abs(min(phi(:))), max(phi(:)));
-        phi=phi/nor;
+        phi = phi/nor;
     end
   
     %Diference. This stopping criterium has the problem that phi can
     %change, but not the zero level set, that it really is what we are
     %looking for.
-    dif = mean(sum( (phi(:) - phi_old(:)).^2 ))
+    dif = mean(sum( (phi(:) - phi_old(:)).^2 ));
           
     %Plot the level sets surface
     subplot(1,2,1) 
