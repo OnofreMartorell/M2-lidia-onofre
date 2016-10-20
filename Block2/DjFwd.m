@@ -4,7 +4,7 @@ function [ result ] = DjFwd( I, hj )
 % j coordinate only for the 1:end-1 columns. The last column is not replaced
 
     if (~exist('hj', 'var'))
-        hj=1;
+        hj = 1;
     end;
  
     result = I;
