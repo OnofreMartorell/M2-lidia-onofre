@@ -4,9 +4,9 @@ clc
 
 %I=double(imread('zigzag_mask.png'));
 %I=mean(I,3); %To 2D matrix
-I=double(imread('circles.png'));
+% I = double(imread('circles.png'));
 %I=double(imread('noisedCircles.tif'));
-%I=double(imread('phantom17.bmp'));
+I=double(imread('phantom17.bmp'));
 %I=double(imread('phantom18.bmp'));
 
 I = mean(I,3);
@@ -37,32 +37,31 @@ epHeaviside = 1;
 %eta=0.01;
 
 eta = 1;
-tol = 0.1;
+tol = 0.00000000001;
 %dt=(10^-2)/mu; 
 dt = (10^-1)/mu;
-iterMax=10;
+iterMax = 1000;
 %reIni=0; %Try both of them
 %reIni=500;
 
-reIni = 100;
+reIni = 1000;
 [X, Y] = meshgrid(1:nj, 1:ni);
 
 %%Initial phi
 phi_0 = (-sqrt( ( X-round(ni/2)).^2 + (Y-round(nj/2)).^2)+50);
-
+% phi_0 = sin(pi/5*X) * sin(pi/5*Y);
 %%% This initialization allows a faster convergence for phantom 18
 %phi_0=(-sqrt( ( X-round(ni/2)).^2 + (Y-round(nj/4)).^2)+50);
-%Normalization of the initial phi to [-1 1]
-%phi_0=phi_0-min(phi_0(:));
-%phi_0=2*phi_0/max(phi_0(:));
-%phi_0=phi_0-1;
+
+
 
 %phi_0=I; %For the Hola carola problem
-
+% Normalization of the initial phi to [-1 1]
 phi_0 = phi_0 - min(phi_0(:));
 phi_0 = 2*phi_0/max(phi_0(:));
 phi_0 = phi_0 - 1;
 
+% phi(i,j) = (phi_old(i,j) + dt*delta_phi(i,j)*( A(i,j)*phi_old(i+1,j) + A(i-1,j)*phi(i-1,j) + B(i,j)*phi_old(i,j+1) + B(i,j-1)*phi(i,j-1) - nu - lambda1*(I(i,j) - c1).^2 + lambda2*(I(i,j) - c2).^2 ))./(1 + dt*delta_phi(i,j)*( A(i,j) + A(i-1,j) + B(i,j) + B(i,j-1) )); %TODO 15: Line to complete
 
 
 %%Explicit Gradient Descent
