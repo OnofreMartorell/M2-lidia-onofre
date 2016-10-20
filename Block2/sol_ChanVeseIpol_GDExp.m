@@ -104,7 +104,7 @@ while dif > tol && nIter < iterMax
         colormap winter;
         hold on
         %The zero level set over the surface
-        contour(phi,0); %TODO 17: Line to complete
+        contour(phi,[0 0],'r','LineWidth',2) %TODO 17: Line to complete
         hold off
         title('Phi Function');
     
@@ -113,7 +113,7 @@ while dif > tol && nIter < iterMax
         imagesc(I);        
         colormap gray;
         hold on;
-        contour(phi,0) %TODO 18: Line to complete
+        contour(phi,[0 0],'r','LineWidth',2) %TODO 18: Line to complete
         title('Image and zero level set of Phi')
 
         axis off;
