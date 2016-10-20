@@ -34,11 +34,11 @@ lambda2=1;
 
 epHeaviside=1;
 %eta=0.01;
-eta=1
+eta=1;
 tol=0.1;
 %dt=(10^-2)/mu; 
 dt=(10^-1)/mu;
-iterMax=100000
+iterMax=100000;
 %reIni=0; %Try both of them
 %reIni=500;
 reIni=100;
