@@ -61,7 +61,7 @@ phi_0 = phi_0 - min(phi_0(:));
 phi_0 = 2*phi_0/max(phi_0(:));
 phi_0 = phi_0 - 1;
 
-% phi(i,j) = (phi_old(i,j) + dt*delta_phi(i,j)*( A(i,j)*phi_old(i+1,j) + A(i-1,j)*phi(i-1,j) + B(i,j)*phi_old(i,j+1) + B(i,j-1)*phi(i,j-1) - nu - lambda1*(I(i,j) - c1).^2 + lambda2*(I(i,j) - c2).^2 ))./(1 + dt*delta_phi(i,j)*( A(i,j) + A(i-1,j) + B(i,j) + B(i,j-1) )); %TODO 15: Line to complete
+
 
 
 %%Explicit Gradient Descent

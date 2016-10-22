@@ -1,4 +1,4 @@
-function [ div ] = divergence( p_i_x, p_i_y )
+function [ div ] = Divergence_p( p_i_x, p_i_y )
 [N_x, N_y] = size(p_i_x);
 div = zeros(N_x, N_y);
 
