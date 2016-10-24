@@ -23,6 +23,12 @@ hj = 1;
 phi = phi_0;
 dif = inf;
 nIter = 0;
+
+video = VideoWriter('video.avi');
+video.FrameRate = 60; % How many frames per second.
+
+open(video);
+
 while dif>tol && nIter<iterMax
     
     phi_old = phi;
@@ -74,7 +80,6 @@ while dif>tol && nIter<iterMax
         B(2:ni-1, 2:nj-1) + B(2:ni-1, 1:nj-2)));
     phi(2:ni-1, 2:nj-1) = num./den;
     %TODO 15: Line to complete
-     
     
     %Reinitialization of phi
     if reIni>0 && mod(nIter, reIni)==0
@@ -97,7 +102,7 @@ while dif>tol && nIter<iterMax
     subplot(1,2,1)
     
     %The level set function
-    surfc(phi)  %TODO 16: Line to complete
+    surfc(phi,'LineStyle','none')  %TODO 16: Line to complete
     hold on
     %The zero level set over the surface
     contour(phi, [0 0], 'r', 'LineWidth', 2) %TODO 17: Line to complete
@@ -115,5 +120,10 @@ while dif>tol && nIter<iterMax
     axis off;
     hold off
     drawnow;
+    
+    frame = getframe(gcf);
+    writeVideo(video, frame);
+    
     pause(.0001);
-end
+end 
+close(video);
