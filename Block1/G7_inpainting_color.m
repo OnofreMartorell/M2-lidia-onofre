@@ -21,6 +21,7 @@ while dif > r && Iter < maxIter
     f = Im.*(1 - mask) + u_n1.*mask;
     p_n = p_n1;
     norm_p = sum(p_n(:).^2);
+    
     if  norm_p > 1
        p_n = p_n/norm_p;
     end    
