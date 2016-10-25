@@ -68,20 +68,21 @@ phi_0 = phi_0 - 1;
 seg = sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
 
 %% Goal Image
+% Computation
 clearvars;
 
 %Read the image
-I = double(imread('image_to_Restore.png'));
+Im = double(imread('image_to_Restore.png'));
 
-i = I(:,:,1);
-[ni, nj, ~] = size(I);
-
+[ni, nj, ~] = size(Im);
+Im = Im - min(Im(:));
+Im = Im/max(Im(:));
 
 
 %We want to inpaint those areas in which mask == 1 (red part of the image)
-I_ch1 = I(:,:,1);
-I_ch2 = I(:,:,2);
-I_ch3 = I(:,:,3);
+I_ch1 = Im(:,:,1);
+I_ch2 = Im(:,:,2);
+I_ch3 = Im(:,:,3);
 
 
 %Create the mask
@@ -90,11 +91,12 @@ mask = zeros(ni,nj) ;
                                       %mask(i,j) == 0 means we have information in that pixel
 for i = 1:ni
     for j = 1:nj
-        if(I_ch1(i,j) == 1 && I_ch2(i,j) == 0 && I_ch3(i,j) == 0)
+        if(I_ch1(i,j) == 1 && I_ch2(i,j) == 0 && I_ch3(i,j) == 0 && i > 284)
             mask(i,j) = 1;
         end
     end
 end
+
 
 I = mask;
 
