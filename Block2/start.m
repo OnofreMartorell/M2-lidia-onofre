@@ -6,8 +6,10 @@ clc
 %I=mean(I,3); %To 2D matrix
 % I = double(imread('circles.png'));
 %I=double(imread('noisedCircles.tif'));
-I=double(imread('phantom17.bmp'));
+% I=double(imread('phantom17.bmp'));
 %I=double(imread('phantom18.bmp'));
+
+I = double(imread('Tres_formas.png'));
 
 I = mean(I,3);
 I = I - min(I(:));
@@ -68,20 +70,21 @@ phi_0 = phi_0 - 1;
 seg = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
 
 %% Goal Image
+% Computation
 clearvars;
 
 %Read the image
-I = double(imread('image_to_Restore.png'));
+Im = double(imread('image_to_Restore.png'));
 
-i = I(:,:,1);
-[ni, nj, ~] = size(I);
-
+[ni, nj, ~] = size(Im);
+Im = Im - min(Im(:));
+Im = Im/max(Im(:));
 
 
 %We want to inpaint those areas in which mask == 1 (red part of the image)
-I_ch1 = I(:,:,1);
-I_ch2 = I(:,:,2);
-I_ch3 = I(:,:,3);
+I_ch1 = Im(:,:,1);
+I_ch2 = Im(:,:,2);
+I_ch3 = Im(:,:,3);
 
 
 %Create the mask
@@ -90,11 +93,12 @@ mask = zeros(ni,nj) ;
                                       %mask(i,j) == 0 means we have information in that pixel
 for i = 1:ni
     for j = 1:nj
-        if(I_ch1(i,j) == 1 && I_ch2(i,j) == 0 && I_ch3(i,j) == 0)
+        if(I_ch1(i,j) == 1 && I_ch2(i,j) == 0 && I_ch3(i,j) == 0 && i > 284)
             mask(i,j) = 1;
         end
     end
 end
+
 
 I = mask;
 
@@ -111,17 +115,17 @@ nu = 0;
 %%Parameters
 % lambda1 = 1;
 % lambda2 = 1;
-lambda1 = 10^-3; %Hola carola problem
-lambda2 = 10^-3; %Hola carola problem
+lambda1 = 10^-2; %Hola carola problem
+lambda2 = 10^-4; %Hola carola problem
 
 epHeaviside = 1;
 %eta=0.01;
 
 eta = 1;
-tol = 0.00000000001;
+tol = 0.0001;
 %dt=(10^-2)/mu; 
 dt = (10^-1)/mu;
-iterMax = 1000;
+iterMax = 2500;
 %reIni=0; %Try both of them
 %reIni=500;
 
@@ -142,4 +146,4 @@ phi_0 = phi_0 - min(phi_0(:));
 phi_0 = 2*phi_0/max(phi_0(:));
 phi_0 = phi_0 - 1;
 
-seg = sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
+seg2 = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );

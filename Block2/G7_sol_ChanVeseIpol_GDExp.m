@@ -24,8 +24,8 @@ H_phi=zeros(ni,nj);
 phi = phi_0;
 dif = inf;
 nIter = 0;
-
-video = VideoWriter('phantom17.avi');
+figure('units','normalized','outerposition',[0 0 1 1])
+video = VideoWriter('Goalimage.avi');
 
 open(video);
 
@@ -38,7 +38,7 @@ while dif>tol && nIter<iterMax
     %Fixed phi, Minimization w.r.t c1 and c2 (constant estimation)
 %     H_phi = 1/2*(1 + 2/pi*atan(phi_old/epHeaviside));
     
-    H_phi(find(phi_old>=0)) = 1;
+    H_phi(phi_old >= 0) = 1;
     
     c1 = sum(sum(I.*H_phi))/(sum(sum(H_phi))); %TODO 1: Line to complete
     c2 = sum(sum(I.*(1 - H_phi)))/(sum(sum(1 - H_phi))); %TODO 2: Line to complete
@@ -100,7 +100,7 @@ while dif>tol && nIter<iterMax
     %change, but not the zero level set, that it really is what we are
     %looking for.
     dif = mean(sum( (phi(:) - phi_old(:)).^2 ));
-    
+   
     %Plot the level sets surface
     subplot(1,2,1)
     
