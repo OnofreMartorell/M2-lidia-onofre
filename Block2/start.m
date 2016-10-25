@@ -6,8 +6,10 @@ clc
 %I=mean(I,3); %To 2D matrix
 % I = double(imread('circles.png'));
 %I=double(imread('noisedCircles.tif'));
-I=double(imread('phantom17.bmp'));
+% I=double(imread('phantom17.bmp'));
 %I=double(imread('phantom18.bmp'));
+
+I = double(imread('Tres_formas.png'));
 
 I = mean(I,3);
 I = I - min(I(:));
@@ -113,17 +115,17 @@ nu = 0;
 %%Parameters
 % lambda1 = 1;
 % lambda2 = 1;
-lambda1 = 10^-3; %Hola carola problem
-lambda2 = 10^-3; %Hola carola problem
+lambda1 = 10^-2; %Hola carola problem
+lambda2 = 10^-4; %Hola carola problem
 
 epHeaviside = 1;
 %eta=0.01;
 
 eta = 1;
-tol = 0.00000000001;
+tol = 0.0001;
 %dt=(10^-2)/mu; 
 dt = (10^-1)/mu;
-iterMax = 1000;
+iterMax = 2500;
 %reIni=0; %Try both of them
 %reIni=500;
 
@@ -144,4 +146,4 @@ phi_0 = phi_0 - min(phi_0(:));
 phi_0 = 2*phi_0/max(phi_0(:));
 phi_0 = phi_0 - 1;
 
-seg = sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
+seg2 = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
