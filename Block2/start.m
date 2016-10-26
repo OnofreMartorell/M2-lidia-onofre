@@ -8,8 +8,10 @@ clc
 %I=double(imread('noisedCircles.tif'));
 % I=double(imread('phantom17.bmp'));
 %I=double(imread('phantom18.bmp'));
+% I = double(imread('phantom19.bmp'));
 
-I = double(imread('Tres_formas.png'));
+
+% I = double(imread('Tres_formas.png'));
 
 I = mean(I,3);
 I = I - min(I(:));
@@ -39,10 +41,10 @@ epHeaviside = 1;
 %eta=0.01;
 
 eta = 1;
-tol = 0.00000000001;
+tol = 0.000001;
 %dt=(10^-2)/mu; 
 dt = (10^-1)/mu;
-iterMax = 1000;
+iterMax = 2000;
 %reIni=0; %Try both of them
 %reIni=500;
 
@@ -68,6 +70,7 @@ phi_0 = phi_0 - 1;
 
 %%Explicit Gradient Descent
 seg = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
+% seg = sol_ChanVeseIpol_no_video( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
 
 %% Goal Image
 % Computation
@@ -115,8 +118,8 @@ nu = 0;
 %%Parameters
 % lambda1 = 1;
 % lambda2 = 1;
-lambda1 = 10^-2; %Hola carola problem
-lambda2 = 10^-4; %Hola carola problem
+lambda1 = 10^-5; %Hola carola problem
+lambda2 = 10^-3; %Hola carola problem
 
 epHeaviside = 1;
 %eta=0.01;
@@ -125,7 +128,7 @@ eta = 1;
 tol = 0.0001;
 %dt=(10^-2)/mu; 
 dt = (10^-1)/mu;
-iterMax = 2500;
+iterMax = 1500;
 %reIni=0; %Try both of them
 %reIni=500;
 
@@ -147,3 +150,4 @@ phi_0 = 2*phi_0/max(phi_0(:));
 phi_0 = phi_0 - 1;
 
 seg2 = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
+% seg2 = sol_ChanVeseIpol_no_video( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );

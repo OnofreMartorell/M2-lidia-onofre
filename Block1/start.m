@@ -129,7 +129,7 @@ mask = zeros(ni,nj) ;
                                       %mask(i,j) == 0 means we have information in that pixel
 for i=1:ni
     for j=1:nj
-        if(I_ch1(i,j) == 1 && I_ch2(i,j) == 0 && I_ch3(i,j) == 0)
+        if(I_ch1(i,j) == 1 && I_ch2(i,j) == 0 && I_ch3(i,j) == 0 && i < 284)
             mask(i,j) = 1;
         end
     end
@@ -156,5 +156,5 @@ Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I_ch3, mask, param);
     
 figure(2)
 imshow(Iinp)
-title('After');
+% title('After');
 
