@@ -33,13 +33,12 @@ param.maxIter = 100000000;
 % title('Before')
 
 
-Iinp = G7_inpainting_color( I, mask, param );
+% Iinp = G7_inpainting_color( I, mask, param );
 
 
-
-figure(2)
-imshow(Iinp)
-title('After'); 
+% figure(2)
+% imshow(Iinp)
+% title('After'); 
 
 %% Challenge image. (We have lost 99% of information)
 clearvars
@@ -54,9 +53,9 @@ mask = mask_img >128; %mask(i,j) == 1 means we have lost information in that pix
                       %pixel
 
 %%Parameters 
-param.r = 10^-2;
+param.r = 10^-5;
 param.lambda = 4;
-param.maxIter = 1000;
+param.maxIter = 10000;
 
 
 % figure(1)
