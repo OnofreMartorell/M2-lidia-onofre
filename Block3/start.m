@@ -47,4 +47,4 @@ for nC = 1: nChannels
     dst1(:,:,nC) = G7_Poisson_Equation_Axb(dst1(:,:,nC), mask_dst,  param);
 end
 
-imshow(dst1/256)
+figure, imshow(dst1/256)
