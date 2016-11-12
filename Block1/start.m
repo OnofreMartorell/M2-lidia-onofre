@@ -157,4 +157,4 @@ Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I_ch3, mask, param);
 figure(2)
 imshow(Iinp)
 % title('After');
-
+imwrite(Iinp, 'Goal_inpaint.png');

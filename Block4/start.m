@@ -28,7 +28,7 @@ I0 = imresize(I0,0.74); %comment if you don't want to downscale the images
 I0 = (double(I0)/255);  % image to fill
 
 %load mask
-%TODO: Save on the testSet Folder the mask of the image to resotre.
+%TODO: Save on the testSet Folder the mask of the image to restore.
 file2read = ['TestSet/??'];
 mask = imread(file2read);
 mask = imresize(mask,0.74); %%comment if you don't want to downscale the images

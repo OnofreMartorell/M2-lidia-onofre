@@ -24,10 +24,10 @@ H_phi=zeros(ni,nj);
 phi = phi_0;
 dif = inf;
 nIter = 0;
-figure('units', 'normalized', 'outerposition', [0 0 1 1])
-video = VideoWriter('videos/phantom17.avi');
+% figure('units', 'normalized', 'outerposition', [0 0 1 1])
+% video = VideoWriter('videos/phantom17.avi');
 
-open(video);
+% open(video);
 
 while dif>tol && nIter<iterMax
     
@@ -102,31 +102,31 @@ while dif>tol && nIter<iterMax
     dif = mean(sum( (phi(:) - phi_old(:)).^2 ));
    
     %Plot the level sets surface
-    subplot(1,2,1)
+%     subplot(1,2,1)
     
     %The level set function
-    surfc(phi,'LineStyle','none')  %TODO 16: Line to complete
-    hold on
-    %The zero level set over the surface
-    contour(phi, [0 0], 'r', 'LineWidth', 2) %TODO 17: Line to complete
-    hold off
-    title('Phi Function');
+%     surfc(phi,'LineStyle','none')  %TODO 16: Line to complete
+%     hold on
+%     %The zero level set over the surface
+%     contour(phi, [0 0], 'r', 'LineWidth', 2) %TODO 17: Line to complete
+%     hold off
+%     title('Phi Function');
+%     
+%     %Plot the curve evolution over the image
+%     subplot(1,2,2)
+%     imagesc(I);
+%     colormap gray;
+%     hold on;
+%     contour(phi,[0 0],'r','LineWidth',2) %TODO 18: Line to complete
+%     title('Image and zero level set of Phi')
+%     
+%     axis off;
+%     hold off
+%     drawnow;
     
-    %Plot the curve evolution over the image
-    subplot(1,2,2)
-    imagesc(I);
-    colormap gray;
-    hold on;
-    contour(phi,[0 0],'r','LineWidth',2) %TODO 18: Line to complete
-    title('Image and zero level set of Phi')
-    
-    axis off;
-    hold off
-    drawnow;
-    
-    frame = getframe(gcf);
-    writeVideo(video, frame);
+%     frame = getframe(gcf);
+%     writeVideo(video, frame);
     
     pause(.000001);
 end 
-close(video);
+% close(video);

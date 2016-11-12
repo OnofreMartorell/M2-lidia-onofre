@@ -118,7 +118,7 @@ nu = 0;
 %%Parameters
 % lambda1 = 1;
 % lambda2 = 1;
-lambda1 = 10^-5; %Hola carola problem
+lambda1 = 10^-3; %Hola carola problem
 lambda2 = 10^-3; %Hola carola problem
 
 epHeaviside = 1;
