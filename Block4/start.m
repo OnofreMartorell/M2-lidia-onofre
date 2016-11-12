@@ -22,20 +22,21 @@ disp('Reading the input data...');
 
 %load images
 %TODO: Save on the TestSet Folder the image to restore, and read it
-file2read = ['TestSet/??'];
+file2read = ['TestSet/Goal_inpaint.png'];
 I0 = imread(file2read);
 I0 = imresize(I0,0.74); %comment if you don't want to downscale the images
 I0 = (double(I0)/255);  % image to fill
 
 %load mask
 %TODO: Save on the testSet Folder the mask of the image to restore.
-file2read = ['TestSet/??'];
+file2read = ['TestSet/mask_goal_image.png'];
 mask = imread(file2read);
 mask = imresize(mask,0.74); %%comment if you don't want to downscale the images
-mask = (double(mask)/255);  %mask of the hole to fill
+% mask = (double(mask)/255);  %mask of the hole to fill
+mask = (double(mask)/max(mask(:)));  %mask of the hole to fill
 
 % Creating the mask
-mask = rgb2gray(mask);
+% mask = rgb2gray(mask);
 mask(mask~=1) = 0;  %remove gray scale, just binary
 
 %Find area where graphical model will be applied
@@ -55,7 +56,7 @@ similar_images = find_similar_images(I0,mask,Nresults,'descriptorsGIST.mat');
 completed_imgs = cell(Nresults,1);
 for j=1:Nresults
     % The image to complete is filled for each of the similar images
-    completed_imgs{j,1} = sol_fill_image(I0,similar_images{j,1},mask,mask_extended);
+    completed_imgs{j,1} = G7_fill_image(I0,similar_images{j,1},mask,mask_extended);
     figure, imshow(completed_imgs{j,1})
      [~,a]=strtok(similar_images{j},'/');
     imwrite(uint8(completed_imgs{j,1}*255),['Results/IMG_0681_',a(2:end)]);

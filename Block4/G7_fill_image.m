@@ -1,4 +1,4 @@
-function filled_im = solution_fill_image(im,dbImg,mask,mask_extended)
+function filled_im = G7_fill_image(im,dbImg,mask,mask_extended)
 %
 % Input:
 % - im: original image. to be completed with a region from...
@@ -18,7 +18,8 @@ dbImg = double(dbImg)/255;
 
 
 % TODO 1: write the number of states
-numPatches = TODO: Number of states
+numPatches = 2;
+%TODO: Number of states
 % end TODO 2
 
 width = bb(3);
@@ -32,7 +33,7 @@ mask_im = mask(pos_hole(1,2):pos_hole(1,2)+height-1,pos_hole(1,1):pos_hole(1,1)+
 % TODO 2: Fill in CreateGridUGMModel function to create the GM structure
 % (4-connected Grid)
 
-edgeStruct=sol_CreateGridUGMModel(height, width, numPatches );
+edgeStruct = G7_CreateGridUGMModel(height, width, numPatches );
 % end TODO 2:
 
 if isempty(edgeStruct)
@@ -50,12 +51,12 @@ end
 %  - see function bwdist to compute Euclidean distance
 
 disp('Computing node potentials...');
-k=0.002;
+k = 0.002;
 
-numNodes = ??;
+numNodes = height*width;
 Vp = zeros(numNodes,numPatches); %Nodes
 
-distances = ??);
+distances = bwdist(mask, 'euclidean');
 for p=1:numNodes %TODO: For each row in Vp (each row is a node) assign potentials
      %HINT: if i,j belongs to the mask, then it has probabilty 0 of being 
      %      from the canditate image and 1 of being mask
@@ -64,11 +65,11 @@ for p=1:numNodes %TODO: For each row in Vp (each row is a node) assign potential
      %      of the distance of being mask
 
     [i,j] = ind2sub( [height, width], p);
-        
+    %order = exist, patch    
     if mask_im(i,j) == 1 %if i,j belongs to the mask, then it has probabilty 0 of being from the canditate image and 1 of being mask
-        Vp(p,:) = ?? 
+        Vp(p,:) = [ 0 1 ];
     else %if i,j DOES NOT belongs to the mask, then it has probabilty 1 of being from the canditate image and a probability depending of the distance of being mask
-        Vp(p,:) = ??
+        Vp(p,:) = [1 1/(k*distances(i, j))^3];
     end
 end
 % END TODO 3:
@@ -81,7 +82,7 @@ end
 %
 
 display('Solving graphical model...');
-SSD= ??
+SSD = (sum(im_complet - im_hole, 3)).^2;
 %  HINT: the image is a color image, so every pixel is a vector but
 %    diff(p,q) is a scalar (at each pixel), so diff(p,q) should be a 
 %    norm. Use L2.
@@ -94,7 +95,7 @@ for e = 1:edgeStruct.nEdges
     [i1,j1] = ind2sub( [height, width], n1);
     [i2,j2] = ind2sub( [height, width], n2);
     
-    potential = ??
+    potential = ((abs(i1 - i2) == 1 && j1 == j2 )|| (abs(j1 - j2) == 1 && i1 == i2))*exp(SSD(i1, j1) - SSD(i2, j2));
     edgePot(:,:,e) = [1 potential; potential 1];
 end
 % END TO DO 4
@@ -107,7 +108,7 @@ end
 
 maxOfMarginalsLBPdecode = [];
 
-maxOfMarginalsLBPdecode = UGM_Decode_LBP(??);
+maxOfMarginalsLBPdecode = UGM_Decode_LBP(Vp, edgePot, edgeStruct);
 % END TO DO 5
 
 

@@ -151,3 +151,7 @@ phi_0 = phi_0 - 1;
 
 seg2 = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
 % seg2 = sol_ChanVeseIpol_no_video( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, epHeaviside, dt, iterMax, reIni );
+
+mask_result = seg2 > 0;
+imshow(mask_result);
+imwrite(mask_result, '../Block4/TestSet/mask_goal_image.png');

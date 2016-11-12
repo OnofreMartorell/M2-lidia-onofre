@@ -28,4 +28,4 @@ else
 		nodeBel(n,1:nStates(n)) = prod_of_msgs(1:nStates(n),n)'./sum(prod_of_msgs(1:nStates(n),n));
 	end
 end
-[pot, nodeLabels] = max(nodeBel,[],2);
+[pot nodeLabels] = max(nodeBel,[],2);
