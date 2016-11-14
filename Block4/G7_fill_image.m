@@ -38,7 +38,7 @@ edgeStruct = G7_CreateGridUGMModel(height, width, numPatches );
 
 if isempty(edgeStruct)
     error('Function: CreateGridUGMModel has to be implemented');
-    filled_im=[];
+    filled_im = [];
     return;
 end
 
@@ -56,7 +56,7 @@ k = 0.002;
 numNodes = height*width;
 Vp = zeros(numNodes,numPatches); %Nodes
 
-distances = bwdist(mask, 'euclidean');
+distances = bwdist(mask_extended, 'euclidean');
 for p=1:numNodes %TODO: For each row in Vp (each row is a node) assign potentials
      %HINT: if i,j belongs to the mask, then it has probabilty 0 of being 
      %      from the canditate image and 1 of being mask
@@ -95,7 +95,7 @@ for e = 1:edgeStruct.nEdges
     [i1,j1] = ind2sub( [height, width], n1);
     [i2,j2] = ind2sub( [height, width], n2);
     
-    potential = ((abs(i1 - i2) == 1 && j1 == j2 )|| (abs(j1 - j2) == 1 && i1 == i2))*exp(SSD(i1, j1) - SSD(i2, j2));
+    potential = exp(SSD(i1, j1) - SSD(i2, j2));
     edgePot(:,:,e) = [1 potential; potential 1];
 end
 % END TO DO 4
