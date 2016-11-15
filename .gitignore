@@ -1,1 +1,8 @@
 Block2/Not_uploaded/
+*.snm
+*.out
+*.nav
+*.log
+*.aux
+*.gz
+*.toc
