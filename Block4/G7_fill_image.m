@@ -95,7 +95,7 @@ for e = 1:edgeStruct.nEdges
     [i1,j1] = ind2sub( [height, width], n1);
     [i2,j2] = ind2sub( [height, width], n2);
     
-    potential = exp(SSD(i1, j1) - SSD(i2, j2));
+    potential = exp(-abs(SSD(i1, j1) - SSD(i2, j2)));
     edgePot(:,:,e) = [1 potential; potential 1];
 end
 % END TO DO 4
