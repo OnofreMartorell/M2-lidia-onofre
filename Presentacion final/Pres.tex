@@ -7,6 +7,8 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{enumerate}
+\usepackage{multimedia}
+\usepackage{mathtools}
 \DeclareMathOperator*{\argmin}{\mathrm{arg\, min}}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -140,13 +142,13 @@ which can be solved using Matlab.
 \framesubtitle{Results}
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.47\textwidth}
         \includegraphics[width=\textwidth]{Image_to_Restore}
 
     \end{subfigure}
     ~ 
-        \begin{subfigure}[b]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{Image_Restored}
+        \begin{subfigure}[b]{0.47\textwidth}
+        \includegraphics[width=\textwidth]{Goal_inpaint_bad}
 
     \end{subfigure}
 
@@ -209,12 +211,12 @@ where $C$ is the boundary of a closed set and $c1$, $c2$ are the values of $u$ r
 \frametitle{Image segmentation}
 \framesubtitle{Solution and implementation}
 \begin{block}{}
-As it is difficult to manipulate $C$ Chan-Vese segmentation uses a function $\phi$ and the $C$ will be the zero crossing of $\varphi$ that is 
+As it is difficult to manipulate $C$, Chan-Vese segmentation uses a function $\varphi$ and the $C$ will be the zero crossing of $\varphi$, that is 
 $$C = \{x\in \Omega:\varphi(x) = 0\}.$$
 \end{block}
 
 With this the functional is rewritten as:
-$$\text{arg min}_{c_1, c_2, \varphi}\ \mu \int_{\Omega}\delta(\varphi(x))|\nabla\varphi(x)|dx+\nu \int_{\Omega}H(\varphi(x))dx +$$$$ \lambda_1\int_{\Omega}|f(x)-c_1|^2H(\varphi(x))dx + \lambda_2\int_{\Omega}|f(x) -c_2|^2(1-H(\varphi(x)))dx,$$
+$$\displaystyle\argmin\limits_{c_1, c_2, \varphi}\ \mu \int_{\Omega}\delta(\varphi(x))|\nabla\varphi(x)|dx+\nu \int_{\Omega}H(\varphi(x))dx +$$$$ \lambda_1\int_{\Omega}|f(x)-c_1|^2H(\varphi(x))dx + \lambda_2\int_{\Omega}|f(x) -c_2|^2(1-H(\varphi(x)))dx,$$
 \end{frame}
 
 \begin{frame}
@@ -243,17 +245,26 @@ The way to do it is the following: at each iteration we do this steps:
 \item[1.] Update $c_1$ and $c_2$ as the average gray scale value where $\phi$ is positive or negative, respectively.
 
 \item [2.] Evolve $\varphi$ using the semi-implicit gradient descent 
-$$\varphi_{i,j}^n = [\varphi_{i,j}^n + dt\cdot\delta_{\varepsilon}(\varphi_{i,j}^n)(A_{i,j}\varphi_{i+1,j}^n) + A_{i-1,j}\varphi_{i-1,j}^{n+1}+B_{i,j}\varphi_{i,j+1}^n+$$
-$$B_{i, j-1}\varphi_{i,j-1}^{n+1}-\nu - \lambda_1(f_{i,j}-c_1)^2+\lambda_2(_{i,j}-c_2)^2) ]/[1 + dt\cdot\delta_{\varepsilon}(\varphi_{i,j}^n)(A_{i,j} +$$$$ A_{i-1,j} + B_{i,j} + B_{i,j-1})]$$. 
-\end{enumerate}
-\end{frame}
 
+
+\end{enumerate}
+\begin{flushleft}
+$
+\begin{dcases}
+\frac{\partial \varphi}{\partial t} = \delta_{\epsilon}(\varphi)\bigg[\mu \text{ div}\bigg(\frac{\nabla\varphi}{|\nabla\varphi|}\bigg) - \nu-\lambda_1(f-c_1)^2+\lambda_2(f-c_2)^2\bigg]\ \text{in }\Omega \\
+\frac{\delta_{\epsilon}(\varphi)}{|\nabla\varphi|}\frac{\partial \varphi}{\partial \vec{n}} = 0\ \text{on }\partial\Omega 
+\end{dcases}$
+\end{flushleft}
+
+\end{frame}
+%$$\varphi_{i,j}^n = [\varphi_{i,j}^n + dt\cdot\delta_{\varepsilon}(\varphi_{i,j}^n)(A_{i,j}\varphi_{i+1,j}^n) + A_{i-1,j}\varphi_{i-1,j}^{n+1}+B_{i,j}\varphi_{i,j+1}^n+$$
+%$$B_{i, j-1}\varphi_{i,j-1}^{n+1}-\nu - \lambda_1(f_{i,j}-c_1)^2+\lambda_2(_{i,j}-c_2)^2) ]/[1 + dt\cdot\delta_{\varepsilon}(\varphi_{i,j}^n)(A_{i,j} +$$$$ A_{i-1,j} + B_{i,j} + B_{i,j-1})]$$. 
 \begin{frame}
 \frametitle{Image segmentation}
 \framesubtitle{Solution and implementation}
 \begin{itemize}
-\item [3.] If we have reached the maximum number of iterations or the difference $\max(|\varphi^{n+1}-\varphi|)$ is lower than a given tolerance, we stop the algorithm.
-\item [4.] Every certain number of iterations, reinitialize $\varphi$.
+\item [3.] Every certain number of iterations, reinitialize $\varphi$.
+\item [4.] If we have reached the maximum number of iterations or the difference $\max(|\varphi^{n+1}-\varphi|)$ is lower than a given tolerance, we stop the algorithm.
 \end{itemize}
 \end{frame}
 
@@ -261,6 +272,12 @@ $$B_{i, j-1}\varphi_{i,j-1}^{n+1}-\nu - \lambda_1(f_{i,j}-c_1)^2+\lambda_2(_{i,j
 \begin{frame}
 \frametitle{Image segmentation}
 \framesubtitle{Results}
+\begin{center}
+%\includegraphics[scale=0.8]{Goal_image}
+\movie{\includegraphics[scale=0.8]{Goal_image}}{Goal_Image_video.avi}
+\end{center}
+
+
 
 \end{frame}
 

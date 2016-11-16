@@ -44,7 +44,7 @@ dist = bwdist(mask,'euclidean');
 mask_extended = mask;
 
 %try several values
-mask_extended(dist<=40 & mask~=1) = 1; % The added area  where graphical model will be applied 
+mask_extended(dist<=35 & mask~=1) = 1; % The added area  where graphical model will be applied 
 
 % Get Nresults nearest images and use them to fill in missing pixels of query
 % image; display results
