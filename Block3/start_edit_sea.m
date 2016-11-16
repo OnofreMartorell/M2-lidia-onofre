@@ -70,24 +70,24 @@ for nC = 1:nChannels
 end
 
 
-%Masks to exchange: Dog swimming
-mask_src=logical(rgb2gray(imread('Mask_dog.png')));
-mask_dst=logical(rgb2gray(imread('Mask_dog_sea.png')));
-for nC = 1: nChannels
-    
-    %TO DO: COMPLETE the ??
-    drivingGrad_i = sol_DiFwd(src2(:,:,nC), param.hi);
-    drivingGrad_j = sol_DjFwd(src2(:,:,nC), param.hj);
-
-    driving_on_src = sol_DiBwd(drivingGrad_i, param.hi) + sol_DjBwd(drivingGrad_j, param.hj);
-    
-    driving_on_dst = zeros(size(dst(:,:,1)));  
-    driving_on_dst(mask_dst(:)) = driving_on_src(mask_src(:));
-    
-    param.driving = driving_on_dst;
-
-    dst1(:,:,nC) = G7_Poisson_Equation_Axb(dst1(:,:,nC), mask_dst,  param);
-end
+% %Masks to exchange: Dog swimming
+% mask_src=logical(rgb2gray(imread('Mask_dog.png')));
+% mask_dst=logical(rgb2gray(imread('Mask_dog_sea.png')));
+% for nC = 1: nChannels
+%     
+%     %TO DO: COMPLETE the ??
+%     drivingGrad_i = sol_DiFwd(src2(:,:,nC), param.hi);
+%     drivingGrad_j = sol_DjFwd(src2(:,:,nC), param.hj);
+% 
+%     driving_on_src = sol_DiBwd(drivingGrad_i, param.hi) + sol_DjBwd(drivingGrad_j, param.hj);
+%     
+%     driving_on_dst = zeros(size(dst(:,:,1)));  
+%     driving_on_dst(mask_dst(:)) = driving_on_src(mask_src(:));
+%     
+%     param.driving = driving_on_dst;
+% 
+%     dst1(:,:,nC) = G7_Poisson_Equation_Axb(dst1(:,:,nC), mask_dst,  param);
+% end
 
 imshow(dst1/256)
 
