@@ -56,7 +56,7 @@ k = 0.002;
 numNodes = height*width;
 Vp = zeros(numNodes,numPatches); %Nodes
 
-distances = bwdist(mask_extended, 'euclidean');
+distances = bwdist(mask, 'euclidean');
 for p=1:numNodes %TODO: For each row in Vp (each row is a node) assign potentials
      %HINT: if i,j belongs to the mask, then it has probabilty 0 of being 
      %      from the canditate image and 1 of being mask

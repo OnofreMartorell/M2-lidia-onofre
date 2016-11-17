@@ -32,11 +32,11 @@ I0 = (double(I0)/255);  % image to fill
 file2read = ['TestSet/mask_hola_carola_02.png'];
 mask = imread(file2read);
 mask = imresize(mask,0.74); %%comment if you don't want to downscale the images
-% mask = (double(mask)/255);  %mask of the hole to fill
+mask = (double(mask)/255);  %mask of the hole to fill
 mask = (double(mask)/max(mask(:)));  %mask of the hole to fill
 
 % Creating the mask
-% mask = rgb2gray(mask);
+mask = rgb2gray(mask);
 mask(mask~=1) = 0;  %remove gray scale, just binary
 
 
