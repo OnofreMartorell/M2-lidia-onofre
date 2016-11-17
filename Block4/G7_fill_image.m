@@ -69,7 +69,8 @@ for p=1:numNodes %TODO: For each row in Vp (each row is a node) assign potential
     if mask_im(i,j) == 1 %if i,j belongs to the mask, then it has probabilty 0 of being from the canditate image and 1 of being mask
         Vp(p,:) = [ 0 1 ];
     else %if i,j DOES NOT belongs to the mask, then it has probabilty 1 of being from the canditate image and a probability depending of the distance of being mask
-        Vp(p,:) = [1 1/exp(-k*distances(i, j))^3];
+%         Vp(p,:) = [1 1/exp(-k*distances(i, j))^3];
+        Vp(p,:) = [1 1/( 1 + k*(distances(i, j))^3)];
     end
 end
 % END TODO 3:
@@ -82,8 +83,9 @@ end
 %
 
 display('Solving graphical model...');
-% SSD = (sum(im_complet - im_hole, 3)).^2;
-SSD = (im_complet - im_hole).^2;
+
+SSD = sum((im_complet - im_hole).^2, 3);
+
 %  HINT: the image is a color image, so every pixel is a vector but
 %    diff(p,q) is a scalar (at each pixel), so diff(p,q) should be a 
 %    norm. Use L2.
@@ -95,8 +97,8 @@ for e = 1:edgeStruct.nEdges
     
     [i1,j1] = ind2sub( [height, width], n1);
     [i2,j2] = ind2sub( [height, width], n2);
-%     [Fh Fv Bh Bv] = imgrad(X)
-    potential = exp(-sum(abs(SSD(i1, j1, :) - SSD(i2, j2, :))));
+
+    potential = abs(SSD(i1, j1) - SSD(i2, j2));
     edgePot(:,:,e) = [1 potential; potential 1];
 end
 % END TO DO 4

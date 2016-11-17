@@ -111,7 +111,7 @@ I = mask;
 %phantom17 mu=1, mu=2, mu=10
 %phantom18 mu=0.2 mu=0.5
 %hola carola mu=1
-mu = 1;
+mu = 0.7;
 nu = 0;
 
 
@@ -125,7 +125,7 @@ epHeaviside = 1;
 %eta=0.01;
 
 eta = 1;
-tol = 0.0001;
+tol = 0.0000001;
 %dt=(10^-2)/mu; 
 dt = (10^-1)/mu;
 iterMax = 1500;
@@ -154,4 +154,4 @@ seg2 = G7_sol_ChanVeseIpol_GDExp( I, phi_0, mu, nu, eta, lambda1, lambda2, tol, 
 
 mask_result = seg2 > 0;
 imshow(mask_result);
-imwrite(mask_result, '../Block4/TestSet/mask_goal_image.png');
+imwrite(mask_result, '../Block4/TestSet/mask_goal_image.bmp');

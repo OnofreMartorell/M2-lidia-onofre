@@ -202,8 +202,8 @@ Divide the image into different parts.
 \framesubtitle{Solution and implementation}
 
 We will use Chan-Vese segmentation which consist on finding a curve that is the boundary of the segmentation. The way to find that curve is minimizing the following functional:
-$$\text{arg min}_{c_1,\ c_2,\ C }\ \mu \text{Lenght}(C) +\nu\text{Area}(inside(C)) +$$$$ \lambda_1\int_{inside(C)}|f(x)-c_1|^2dx + \lambda_2\int_{outside(C)}|f(x)-c_2|^2dx,$$
-where $C$ is the boundary of a closed set and $c1$, $c2$ are the values of $u$ respectively inside and outside of $C$. 
+$$\displaystyle\argmin\limits_{c_1, c_2, C}\ \mu \text{Lenght}(C) +\nu\text{Area}(inside(C)) +$$$$ \lambda_1\int_{inside(C)}|f(x)-c_1|^2dx + \lambda_2\int_{outside(C)}|f(x)-c_2|^2dx,$$
+where $C$ is the boundary of a closed set and $c_1$, $c_2$ are the values of $u$ respectively inside and outside of $C$. 
 
 \end{frame}
 
@@ -211,7 +211,7 @@ where $C$ is the boundary of a closed set and $c1$, $c2$ are the values of $u$ r
 \frametitle{Image segmentation}
 \framesubtitle{Solution and implementation}
 \begin{block}{}
-As it is difficult to manipulate $C$, Chan-Vese segmentation uses a function $\varphi$ and the $C$ will be the zero crossing of $\varphi$, that is 
+As it is difficult to manipulate $C$, Chan-Vese segmentation uses a function $\varphi$, where the curve $C$ will be the zero crossing of it, that is 
 $$C = \{x\in \Omega:\varphi(x) = 0\}.$$
 \end{block}
 
@@ -242,7 +242,7 @@ Now we have to minimize the functional respect to $c_1$, $c_2$ and $\varphi$.
 
 The way to do it is the following: at each iteration we do this steps:
 \begin{enumerate}
-\item[1.] Update $c_1$ and $c_2$ as the average gray scale value where $\phi$ is positive or negative, respectively.
+\item[1.] Update $c_1$ and $c_2$ as the average gray scale value where $\varphi$ is positive or negative, respectively.
 
 \item [2.] Evolve $\varphi$ using the semi-implicit gradient descent 
 
@@ -272,10 +272,14 @@ $
 \begin{frame}
 \frametitle{Image segmentation}
 \framesubtitle{Results}
+\begin{figure}
 \begin{center}
-%\includegraphics[scale=0.8]{Goal_image}
-\movie{\includegraphics[scale=0.8]{Goal_image}}{Goal_Image_video.avi}
+\includegraphics[scale=0.33]{Segmentation}
+
+
 \end{center}
+\end{figure}
+
 
 
 
@@ -354,7 +358,25 @@ What we have done is the following: we have taken the code of the previous week 
 \begin{frame}
 \frametitle{Poisson Image editing}
 \framesubtitle{Results}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.36\textwidth}
+        \includegraphics[width=\textwidth]{the_sea}
 
+    \end{subfigure}
+    ~ 
+        \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{family}
+
+    \end{subfigure}
+
+
+
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{family_sea}
+\end{figure}
 \end{frame}
 
 
