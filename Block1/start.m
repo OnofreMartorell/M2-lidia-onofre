@@ -101,7 +101,7 @@ Iinp(:,:,3)=G7_sol_Laplace_Equation_Axb(I(:,:,3), mask(:,:,3), param);
 figure(2)
 imshow(Iinp)
 title('After');
-
+imwrite(Iinp, './Inpaint/Restored/99_restored_separated.png');
 %% Goal Image
 clearvars;
 

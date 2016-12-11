@@ -108,7 +108,7 @@ param.hj = 1 / (nj-1);
 
 param.r = 10^-3;
 param.lambda = 6;
-param.maxIter = 1000;
+param.maxIter = 5000;
 param.delta_t = 1/4;
 
 
@@ -171,23 +171,20 @@ I = I / max(I(:));
 
 %We want to inpaint those areas in which mask == 1 (blue part of the image)
 
-mask = double(imread('mask_Boats.png')); %mask_img(i,j) == 1 means we have lost information in that pixel
-                          %mask(i,j) == 0 means we have information in that pixel
+mask = imread('mask_Boats.png'); %mask_img(i,j) == 1 means we have lost information in that pixel
+mask = mask > 128;                           %mask(i,j) == 0 means we have information in that pixel
 
 
-%parameters
-param.hi = 1 / (ni-1);
-param.hj = 1 / (nj-1);
-
-param.r = 10^-5;
-param.lambda = 10;
+% Parameters
+param.r = 10^-7;
+param.lambda = 7;
 param.maxIter = 2000;
 param.delta_t = 1/4;
 
 
-figure(1)
-imshow(I);
-title('Before')
+% figure(1)
+% imshow(I);
+% title('Before')
 
 
 Iinp = G7_inpainting_color( I, mask, param );
@@ -195,4 +192,6 @@ Iinp = G7_inpainting_color( I, mask, param );
 figure(2)
 imshow(Iinp)
 title('After');
+
 imwrite(Iinp, './Inpaint/Restored/Boats_restored.png');
+
