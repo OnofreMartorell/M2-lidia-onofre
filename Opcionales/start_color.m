@@ -52,12 +52,12 @@ I = I/256;
 
 
 mask_img = double(imread('image6_mask.tif'));
-mask = mask_img >128; %mask(i,j) == 1 means we have lost information in that pixel
+mask = mask_img > 128; %mask(i,j) == 1 means we have lost information in that pixel
                       %mask(i,j) == 0 means we have information in that
                       %pixel
 
 %%Parameters 
-param.r = 10^-5;
+param.r = 10^-3;
 param.lambda = 4;
 param.maxIter = 2000;
 param.delta_t = 1/4;

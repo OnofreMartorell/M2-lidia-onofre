@@ -4,9 +4,9 @@ clc
 addpath(genpath('../Block2'))
 
 % I = double(imread('circles.png'));
-% I = double(imread('noisedCircles.tif'));
-% I = double(imread('phantom17.bmp'));
-% I = double(imread('phantom18.bmp'));
+% I = double(imread('noisedCircles.tif')); %Lambda 7, 6.5
+% I = double(imread('phantom17.bmp')); %Lambda 6.5
+% I = double(imread('phantom18.bmp')); %Lambda 12
 I = double(imread('phantom19.bmp'));
 
 
@@ -24,20 +24,20 @@ params_ROF.delta_t = 1/4;
 
 
 %%Parameters
-param.lambda = 10;
+param.lambda = 12;
 %lambda1=10^-3; %Hola carola problem
 %lambda2=10^-3; %Hola carola problem
 
 
 param.tol = 1000;
-param.iterMax = 4;
+param.iterMax = 1;
 
 [X, Y] = meshgrid(1:nj, 1:ni);
 
 %%Initial phi
-E_0 = (-sqrt( ( X-round(ni/2)).^2 + (Y-round(nj/2)).^2) + 50);
+% E_0 = (-sqrt( ( X-round(ni/2)).^2 + (Y-round(nj/2)).^2) + 50);
 %%% This initialization allows a faster convergence for phantom 18
-% E_0 = (-sqrt( ( X-round(ni/2)).^2 + (Y-round(nj/4)).^2)+50);
+E_0 = (-sqrt( ( X-round(ni/2)).^2 + (Y-round(nj/4)).^2)+50);
 
 E_0 = E_0 > 0;
 
@@ -50,3 +50,4 @@ E_0 = E_0 > 0;
 
 %%Explicit Gradient Descent
 seg = segmentation_Chambolle( I, E_0, param, params_ROF );
+sprintf('Finished')
